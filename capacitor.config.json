@@ -1,0 +1,8 @@
+{
+  "appId": "com.zerozaya.app",
+  "appName": "Zerozaya",
+  "webDir": "out",
+  "server": {
+    "androidScheme": "https"
+  }
+}
