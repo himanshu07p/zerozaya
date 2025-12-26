@@ -115,11 +115,12 @@ export default function ExplorePage() {
   });
 
   return (
-    <div className="pt-16 min-h-screen bg-[var(--muted)]">
+    <div className="pt-safe-header min-h-screen bg-[var(--muted)]">
+      {/* Header Section */}
       {/* Header Section */}
       <div className="bg-white border-b border-[var(--border)]">
-        <div className="container py-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-4">
+        <div className="container py-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-20">
             Explore Restaurants
           </h1>
 
@@ -127,14 +128,16 @@ export default function ExplorePage() {
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search Bar */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search restaurants, cuisines..."
-                className="input pl-12 w-full"
-              />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                  <Search className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search restaurants, cuisines..."
+                    className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
+                  />
+              </div>
             </div>
 
             {/* Filter Toggle (Mobile) */}
@@ -172,8 +175,8 @@ export default function ExplorePage() {
           </div>
 
           {/* Cuisine Filters */}
-          <div className={`mt-4 ${showFilters ? "block" : "hidden md:block"}`}>
-            <div className="flex flex-wrap gap-2">
+          <div className={`mt-6 ${showFilters ? "block" : "hidden md:block"}`}>
+            <div className="flex flex-wrap gap-3">
               {cuisineFilters.map((cuisine) => (
                 <button
                   key={cuisine}
@@ -193,7 +196,7 @@ export default function ExplorePage() {
       </div>
 
       {/* Results Section */}
-      <div className="container py-10">
+      <div className="container py-12">
         <div className="flex items-center justify-between mb-8">
           <p className="text-[var(--muted-foreground)]">
             Showing <span className="font-medium text-[var(--foreground)]">{filteredRestaurants.length}</span> restaurants

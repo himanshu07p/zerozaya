@@ -15,7 +15,24 @@ import {
 } from "lucide-react";
 
 // Mock restaurant data
-const restaurants: Record<string, typeof restaurant> = {
+
+interface Restaurant {
+  id: number;
+  name: string;
+  tagline: string;
+  cuisine: string;
+  rating: number;
+  reviews: number;
+  priceRange: string;
+  location: string;
+  hours: string;
+  phone: string;
+  website: string;
+  images: string[];
+  about: string;
+}
+
+const restaurants: Record<string, Restaurant> = {
   "1": {
     id: 1,
     name: "The Green Kitchen",
@@ -124,10 +141,10 @@ export default function RestaurantPageClient({ id }: RestaurantPageClientProps) 
   const currentRestaurant = restaurants[id] || restaurant;
 
   return (
-    <div className="pt-16 min-h-screen bg-white">
+    <div className="pt-safe-header min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative">
-        <div className="grid grid-cols-4 gap-1 h-64 md:h-80">
+      <div className="relative bg-[var(--muted)]">
+        <div className="grid grid-cols-4 gap-1 h-64 md:h-80 overflow-hidden">
           <div className="col-span-4 md:col-span-2 row-span-2">
             <img
               src={currentRestaurant.images[0]}

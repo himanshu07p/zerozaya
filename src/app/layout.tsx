@@ -10,6 +10,7 @@ const inter = Inter({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
   title: "Zerozaya - Discover Local Food",
   description: "Explore the best local food spots near you. Browse menus, discover dishes, and find your next favorite meal.",
@@ -22,6 +23,19 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#ffffff",
+};
+
+
+import SmoothScroll from "@/components/providers/SmoothScroll";
+import BottomNav from "@/components/layout/BottomNav";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,9 +44,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Navbar />
+          <main className="min-h-screen pb-16 md:pb-0">{children}</main>
+          <BottomNav />
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

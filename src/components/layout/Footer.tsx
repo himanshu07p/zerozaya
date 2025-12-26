@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[var(--foreground)] text-white">
-      <div className="container py-12">
+      <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
@@ -61,8 +61,8 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6">Company</h4>
+            <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -78,8 +78,8 @@ export default function Footer() {
 
           {/* Support Links */}
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6">Support</h4>
+            <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -95,8 +95,8 @@ export default function Footer() {
 
           {/* Partner Links */}
           <div>
-            <h4 className="font-semibold mb-4">For Partners</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6">For Partners</h4>
+            <ul className="space-y-3">
               {footerLinks.partners.map((link) => (
                 <li key={link.href}>
                   <Link

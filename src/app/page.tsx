@@ -1,18 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Search,
-  ArrowRight,
-  Star,
-  Utensils,
-  Coffee,
-  Pizza,
-  Salad,
-  Cake,
-  ChefHat,
-} from "lucide-react";
+import { Search, ArrowRight, Star } from "lucide-react";
 
 // Mock data for featured restaurants
 const featuredRestaurants = [
@@ -55,12 +46,70 @@ const featuredRestaurants = [
 ];
 
 const categories = [
-  { icon: Utensils, name: "All", count: 1250 },
-  { icon: Coffee, name: "Cafes", count: 340 },
-  { icon: Pizza, name: "Fast Food", count: 520 },
-  { icon: Salad, name: "Healthy", count: 280 },
-  { icon: Cake, name: "Desserts", count: 190 },
-  { icon: ChefHat, name: "Fine Dining", count: 85 },
+  { 
+    name: "North Indian",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "South Indian", 
+    image: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Chinese", 
+    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Italian", 
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Fast Food", 
+    image: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Healthy", 
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Desserts", 
+    image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Biryani", 
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Burger", 
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Pizza", 
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Sushi", 
+    image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Rolls", 
+    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Chaats", 
+    image: "https://images.unsplash.com/photo-1605333396915-47ed6b68a00e?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Thali", 
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Tea", 
+    image: "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?w=200&h=200&fit=crop",
+  },
+  { 
+    name: "Momos", 
+    image: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=200&h=200&fit=crop",
+  },
 ];
 
 const popularDishes = [
@@ -94,293 +143,206 @@ const popularDishes = [
   },
 ];
 
+
+
 export default function Home() {
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  
+  // Display only first 8 categories if not expanded (4x2 grid)
+  // Assuming 4 columns on mobile
+  const displayedCategories = showAllCategories ? categories : categories.slice(0, 8);
+
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&h=1080&fit=crop&q=80"
-            alt="Delicious food spread"
-            className="w-full h-full object-cover"
+    <div className="pb-24 md:pb-0"> {/* Increased bottom padding for nav */}
+      
+      {/* Search Bar - Sticky & Integrated */}
+      <div className="md:hidden sticky top-[var(--header-height)] z-30 bg-white/95 backdrop-blur-sm px-4 py-3 border-b border-[var(--border)] shadow-sm">
+        <div className="flex items-center gap-3 px-4 py-2.5 bg-[var(--muted)]/50 border border-[var(--border)] rounded-2xl">
+          <Search className="w-4 h-4 text-[var(--muted-foreground)]" />
+          <input
+            type="text"
+            placeholder="Search for food, restaurants..."
+            className="flex-1 bg-transparent outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
         </div>
+      </div>
 
-        {/* Content */}
-        <div className="container relative z-10 text-center py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-              Discover Your Next
-              <br />
-              <span className="text-[var(--primary-light)]">Favorite Meal</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-xl mx-auto">
-              Explore menus from the best local restaurants. No delivery, just discovery.
-            </p>
-
-            {/* Search Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-3 p-2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl max-w-2xl mx-auto"
-            >
-              <div className="flex items-center gap-3 px-4 flex-1">
-                <Search className="w-5 h-5 text-[var(--muted-foreground)]" />
-                <input
-                  type="text"
-                  placeholder="Search restaurants, cuisines, dishes..."
-                  className="flex-1 py-3 bg-transparent outline-none text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]"
-                />
-              </div>
-              <button className="btn btn-primary px-8 py-3">
-                <Search className="w-4 h-4" />
-                Search
-              </button>
-            </motion.div>
-
-            {/* Quick Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex justify-center gap-12 mt-12"
-            >
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white">1000+</p>
-                <p className="text-sm text-white/60">Restaurants</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white">5000+</p>
-                <p className="text-sm text-white/60">Dishes</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white">50+</p>
-                <p className="text-sm text-white/60">Cities</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-              className="w-1.5 h-1.5 bg-white rounded-full"
-            />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16 bg-[var(--muted)]">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-8">
-              Browse by Category
+      {/* Hero / Categories Grid */}
+      {/* Added pt-4 to clear the sticky search bar if needed, but sticky search is relative to flow. 
+          The issue might be fixed header overlapping. 
+          The Navbar is fixed h-[var(--header-height)]. 
+          The sticky search bar is `top-[var(--header-height)]`.
+          So the content starts flow under Navbar. We need padding top on the whole page or first section equal to header + search bar? 
+          Actually Navbar is fixed, so main content flows under it. 
+          We added `pt-safe-header` in other pages. Let's add top margin to this first section or wrapper. 
+      */}
+      <section className="pt-32 md:pt-40 md:pb-16">
+        <div className="container pt-4 md:pt-0">
+          <div className="flex items-center justify-between mb-5 px-1 md:px-0">
+            <h2 className="text-lg md:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+              What's on your mind?
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-              {categories.map((category, index) => (
-                <motion.div
-                  key={category.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={`/explore?category=${category.name.toLowerCase()}`}
-                    className="flex flex-col items-center p-6 bg-white rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] hover:shadow-lg transition-all group"
-                  >
-                    <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors mb-3">
-                      <category.icon className="w-6 h-6" />
-                    </div>
-                    <span className="font-medium text-[var(--foreground)]">
-                      {category.name}
-                    </span>
-                    <span className="text-sm text-[var(--muted-foreground)]">
-                      {category.count} places
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
+             {/* Mobile See All Toggle - Hidden on desktop if we use the bottom button */}
+             {!showAllCategories && categories.length > 8 && (
+              <button
+                onClick={() => setShowAllCategories(true)}
+                className="text-xs font-semibold text-[var(--primary)] bg-[var(--primary)]/10 px-3 py-1.5 rounded-full md:hidden"
+              >
+                See All
+              </button>
+            )}
+          </div>
+
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-y-6 gap-x-2">
+            {displayedCategories.map((category, index) => (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="flex flex-col items-center gap-2 group cursor-pointer"
+              >
+                <div className="relative w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden shadow-sm border border-[var(--border)] group-hover:border-[var(--primary)] group-hover:shadow-md transition-all bg-[var(--muted)]">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover p-0.5 rounded-full"
+                  />
+                </div>
+                <span className="text-[10px] md:text-sm font-semibold text-[var(--foreground)]/80 text-center text-ellipsis line-clamp-1 leading-tight">
+                  {category.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Desktop Expansion Button */}
+          {!showAllCategories && categories.length > 8 && (
+            <div className="mt-8 text-center hidden md:block">
+              <button 
+                onClick={() => setShowAllCategories(true)}
+                className="btn btn-outline hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all"
+              >
+                  Show All Categories
+              </button>
             </div>
-          </motion.div>
+          )}
         </div>
       </section>
+
 
       {/* Featured Restaurants */}
-      <section className="py-16">
+      <section className="py-2 md:py-8">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--foreground)]">
-                Featured Restaurants
-              </h2>
-              <Link
-                href="/explore"
-                className="flex items-center gap-2 text-[var(--primary)] font-medium hover:underline"
-              >
-                View All <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+           <div className="flex items-center justify-between mb-5 px-1 md:px-0">
+            <h2 className="text-lg md:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+              Featured Restaurants
+            </h2>
+            <Link
+              href="/explore"
+              className="flex items-center gap-1 text-xs md:text-sm text-[var(--primary)] font-semibold hover:underline bg-[var(--primary)]/10 px-3 py-1.5 rounded-full"
+            >
+              See All <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+            </Link>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredRestaurants.map((restaurant, index) => (
-                <motion.div
-                  key={restaurant.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <Link href={`/restaurant/${restaurant.id}`} className="card block group">
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <img
-                        src={restaurant.image}
-                        alt={restaurant.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      {restaurant.badge && (
-                        <span className="absolute top-3 left-3 badge">
-                          {restaurant.badge}
-                        </span>
-                      )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-1 md:px-0">
+            {featuredRestaurants.map((restaurant, index) => (
+              <motion.div
+                key={restaurant.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Link href={`/restaurant/${restaurant.id}`} className="card block group hover:shadow-xl transition-all border border-[var(--border)]/50 rounded-2xl overflow-hidden pb-2">
+                  <div className="relative aspect-[16/10] md:aspect-[4/3] overflow-hidden">
+                    <img
+                      src={restaurant.image}
+                      alt={restaurant.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {restaurant.badge && (
+                      <span className="absolute top-3 left-3 badge bg-white/95 backdrop-blur-md text-[var(--foreground)] shadow-sm font-bold text-[10px] uppercase tracking-wider px-2 py-1">
+                        {restaurant.badge}
+                      </span>
+                    )}
+                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-2 py-1 rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm">
+                       <Star className="w-3 h-3 text-[var(--primary)] fill-current" />
+                       {restaurant.rating}
                     </div>
-                    <div className="p-5">
-                      <h3 className="font-semibold text-[var(--foreground)] mb-1">
+                  </div>
+                  <div className="p-3 md:p-4">
+                    <div className="flex justify-between items-start mb-1">
+                        <h3 className="font-bold text-lg text-[var(--foreground)] truncate flex-1">
                         {restaurant.name}
-                      </h3>
-                      <p className="text-sm text-[var(--muted-foreground)] mb-3">
-                        {restaurant.cuisine}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-1 text-[var(--primary)]">
-                          <Star className="w-4 h-4 fill-current" />
-                          <span className="font-medium">{restaurant.rating}</span>
-                        </div>
-                        <span className="text-sm text-[var(--muted-foreground)]">
-                          ({restaurant.reviews} reviews)
-                        </span>
-                      </div>
+                        </h3>
                     </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                    
+                    <p className="text-xs md:text-sm text-[var(--muted-foreground)] mb-3 truncate font-medium">
+                      {restaurant.cuisine}
+                    </p>
+                    <div className="flex items-center justify-between border-t border-[var(--border)]/50 pt-3">
+                       <span className="text-[10px] md:text-xs text-[var(--muted-foreground)] bg-[var(--muted)] px-2 py-1 rounded-md">
+                          {restaurant.reviews} reviews
+                       </span>
+                        <span className="text-[10px] md:text-xs font-bold text-[var(--primary)]">
+                            View Menu
+                        </span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Popular Dishes */}
-      <section className="py-16 bg-[var(--muted)]">
+      <section className="py-6 md:py-8 bg-[var(--muted)]/30 border-t border-[var(--border)]/50">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--foreground)]">
-                Popular Dishes
-              </h2>
-              <Link
-                href="/explore"
-                className="flex items-center gap-2 text-[var(--primary)] font-medium hover:underline"
-              >
-                Explore More <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {popularDishes.map((dish, index) => (
-                <motion.div
-                  key={dish.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-4 bg-white rounded-2xl border border-[var(--border)] hover:shadow-lg transition-shadow"
-                >
-                  <img
-                    src={dish.image}
-                    alt={dish.name}
-                    className="w-20 h-20 rounded-xl object-cover"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-[var(--foreground)]">
-                      {dish.name}
-                    </h3>
-                    <p className="text-sm text-[var(--muted-foreground)]">
-                      {dish.restaurant}
-                    </p>
-                    <p className="text-[var(--primary)] font-medium mt-1">
-                      {dish.price}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[var(--primary)]">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Own a Restaurant?
+           <div className="flex items-center justify-between mb-5 px-1 md:px-0">
+            <h2 className="text-lg md:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+              Popular Dishes
             </h2>
-            <p className="text-white/80 mb-8">
-              Join Zerozaya and showcase your menu to thousands of food lovers.
-              List your restaurant for free and reach more customers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/seller/register" className="btn bg-white text-[var(--primary)] hover:bg-gray-100">
-                Register Your Restaurant
-              </Link>
-              <Link href="/about" className="btn border-2 border-white text-white hover:bg-white/10">
-                Learn More
-              </Link>
-            </div>
-          </motion.div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 px-1 md:px-0">
+            {popularDishes.map((dish, index) => (
+              <motion.div
+                key={dish.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
+                  <div className="bg-white p-2.5 md:p-3 rounded-xl border border-[var(--border)] shadow-sm h-full flex flex-col group cursor-pointer hover:border-[var(--primary)]/30 transition-all">
+                      <div className="aspect-square rounded-lg overflow-hidden mb-2.5 relative">
+                        <img
+                            src={dish.image}
+                            alt={dish.name}
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                        />
+                        <button className="absolute bottom-2 right-2 w-7 h-7 rounded-full bg-white shadow-md flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors">
+                            <span className="text-lg leading-none mb-0.5">+</span>
+                        </button>
+                      </div>
+                      <h3 className="font-bold text-sm text-[var(--foreground)] line-clamp-1 mb-0.5">
+                        {dish.name}
+                      </h3>
+                      <p className="text-[10px] md:text-xs text-[var(--muted-foreground)] line-clamp-1 mb-2">
+                        {dish.restaurant}
+                      </p>
+                      <div className="mt-auto">
+                          <span className="font-black text-sm text-[var(--foreground)]">{dish.price}</span>
+                      </div>
+                  </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
+
     </div>
   );
 }

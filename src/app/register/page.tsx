@@ -100,15 +100,15 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                 Full Name
               </label>
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                <User className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your full name"
-                  className="input pl-12"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                   required
                 />
               </div>
@@ -120,15 +120,15 @@ export default function RegisterPage() {
                   <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                     Restaurant Name
                   </label>
-                  <div className="relative">
-                    <Store className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+                  <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                    <Store className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                     <input
                       type="text"
                       name="restaurantName"
                       value={formData.restaurantName}
                       onChange={handleChange}
                       placeholder="Enter restaurant name"
-                      className="input pl-12"
+                      className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                       required
                     />
                   </div>
@@ -138,15 +138,15 @@ export default function RegisterPage() {
                   <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                     Restaurant Address
                   </label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+                  <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                    <MapPin className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                     <input
                       type="text"
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
                       placeholder="Enter restaurant address"
-                      className="input pl-12"
+                      className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                       required
                     />
                   </div>
@@ -158,15 +158,15 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                <Mail className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
-                  className="input pl-12"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                   required
                 />
               </div>
@@ -176,15 +176,15 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                 Phone Number
               </label>
-              <div className="relative">
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                <Phone className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="Enter your phone number"
-                  className="input pl-12"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                   required
                 />
               </div>
@@ -194,22 +194,22 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                 Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                <Lock className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a password"
-                  className="input pl-12 pr-12"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                   required
                   minLength={8}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] focus:outline-none shrink-0"
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -224,15 +224,15 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
                 Confirm Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]" />
+              <div className="flex items-center gap-3 px-4 py-3 border-[1.5px] border-[var(--border)] rounded-lg bg-[var(--background)] focus-within:border-[var(--primary)] focus-within:ring-[3px] focus-within:ring-[#2E8B571A] transition-all duration-200">
+                <Lock className="w-5 h-5 text-[var(--muted-foreground)] shrink-0" />
                 <input
                   type={showPassword ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm your password"
-                  className="input pl-12"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] h-full"
                   required
                 />
               </div>

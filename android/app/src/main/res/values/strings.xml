@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Zerozaya</string>
+    <string name="title_activity_main">Zerozaya</string>
+    <string name="package_name">com.zerozaya.app</string>
+    <string name="custom_url_scheme">com.zerozaya.app</string>
+</resources>

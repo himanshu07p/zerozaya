@@ -73,7 +73,7 @@ export default function SellerDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--muted)] pt-16">
+    <div className="min-h-screen bg-[var(--muted)] pt-safe-header">
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
