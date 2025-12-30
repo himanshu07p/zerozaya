@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Search,
@@ -95,11 +96,19 @@ const cuisineFilters = [
   "Fast Food",
 ];
 
-export default function ExplorePage() {
+function ExploreContent() {
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      setSelectedCuisine(categoryParam);
+    }
+  }, [searchParams]);
 
   const filteredRestaurants = restaurants.filter((restaurant) => {
     const matchesSearch =
@@ -115,12 +124,12 @@ export default function ExplorePage() {
   });
 
   return (
-    <div className="pt-safe-header min-h-screen bg-[var(--muted)]">
+    <div className="pt-safe-header min-h-screen bg-[var(--background)]">
       {/* Header Section */}
       {/* Header Section */}
       <div className="bg-white border-b border-[var(--border)]">
-        <div className="container py-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-20">
+        <div className="container py-10 mt-2 flex flex-col gap-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-[var(--foreground)]">
             Explore Restaurants
           </h1>
 
@@ -289,5 +298,13 @@ export default function ExplorePage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ExplorePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ExploreContent />
+    </Suspense>
   );
 }

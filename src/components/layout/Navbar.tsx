@@ -9,7 +9,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--border)] h-[var(--header-height)] pt-[var(--sat)] transition-all duration-200">
+    <header className="absolute md:fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--border)] h-[var(--header-height)] pt-[var(--sat)] transition-all duration-200">
       <div className="container h-full">
         <nav className="flex items-center justify-between h-full gap-4">
           {/* Logo */}

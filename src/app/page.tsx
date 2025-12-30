@@ -153,10 +153,10 @@ export default function Home() {
   const displayedCategories = showAllCategories ? categories : categories.slice(0, 8);
 
   return (
-    <div className="pb-24 md:pb-0"> {/* Increased bottom padding for nav */}
+    <div className="pt-[var(--header-height)] pb-24 md:pt-0 md:pb-0"> {/* Increased bottom padding for nav, top padding for header */}
       
       {/* Search Bar - Sticky & Integrated */}
-      <div className="md:hidden sticky top-[var(--header-height)] z-30 bg-white/95 backdrop-blur-sm px-4 py-3 border-b border-[var(--border)] shadow-sm">
+      <div className="md:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-sm px-4 py-3 border-b border-[var(--border)] shadow-sm">
         <div className="flex items-center gap-3 px-4 py-2.5 bg-[var(--muted)]/50 border border-[var(--border)] rounded-2xl">
           <Search className="w-4 h-4 text-[var(--muted-foreground)]" />
           <input
@@ -200,18 +200,22 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="flex flex-col items-center gap-2 group cursor-pointer"
               >
-                <div className="relative w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden shadow-sm border border-[var(--border)] group-hover:border-[var(--primary)] group-hover:shadow-md transition-all bg-[var(--muted)]">
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-full object-cover p-0.5 rounded-full"
-                  />
-                </div>
-                <span className="text-[10px] md:text-sm font-semibold text-[var(--foreground)]/80 text-center text-ellipsis line-clamp-1 leading-tight">
-                  {category.name}
-                </span>
+                <Link 
+                  href={`/explore?category=${encodeURIComponent(category.name)}`}
+                  className="flex flex-col items-center gap-2 group cursor-pointer"
+                >
+                  <div className="relative w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden shadow-sm border border-[var(--border)] group-hover:border-[var(--primary)] group-hover:shadow-md transition-all bg-[var(--muted)]">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-full h-full object-cover p-0.5 rounded-full"
+                    />
+                  </div>
+                  <span className="text-[10px] md:text-sm font-semibold text-[var(--foreground)]/80 text-center text-ellipsis line-clamp-1 leading-tight">
+                    {category.name}
+                  </span>
+                </Link>
               </motion.div>
             ))}
           </div>
